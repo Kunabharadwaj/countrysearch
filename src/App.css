@@ -75,3 +75,19 @@ body{
   font-weight: 400;
   opacity: 80%;
 }
+
+.country_bottom h4{
+  color: #fff;
+  text-align: center;
+  margin-top: 15px;
+}
+
+input{
+  padding: 10px 25px;
+  color: #fff;
+  border-radius: 5px;
+  background: hsl(209, 23%, 22%);
+  border: none;
+  outline: none;
+  margin-bottom: 50px;
+}

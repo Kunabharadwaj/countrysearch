@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { apiURL } from "../util/api";
+import SearchInput from "../Search/SearchInput";
 
 function AllCountries() {
   const [countries, SetCountries] = useState([]);
@@ -25,35 +26,52 @@ function AllCountries() {
     }
   };
 
+  const getCountryByName = async (countryName) => {
+    try {
+      const res = await fetch(`${apiURL}/name/${countryName}`);
+
+      if (!res.ok) throw new Error("Not found any Country!");
+
+      const data = await res.json();
+
+      SetCountries(data)
+
+      SetIsLoading(false)
+      
+    } catch (error) {
+        SetIsLoading(false)
+        setError(error.message)
+    }
+  };
+
   useEffect(() => {
     getAllCountries();
   }, []);
 
   return (
     <div className="all_country_wrapper">
-      <div className="country_top"></div>
+      <div className="country_top">
+        <div className="search">
+          <SearchInput onSearch={getCountryByName} />
+        </div>
+      </div>
       <div className="country_bottom">
         {isLoading && !error && <h4>Loading....</h4>}
         {error && !isLoading && <h4>{error}</h4>}
 
-        {
-            countries?.map(country=>(
-                
-                <div className="country_card">
-                    <div className="country_img">
-                        <img src={country.flags.png} alt=''/>
-                    </div>
-                    <div className="country_data">
-                        <h3>{country.name.common}</h3>
-                        <h6>Population:{country.population}</h6>
-                        <h6>Region:{country.region}</h6>
-                        <h6>Capital:{country.capital}</h6>
-
-                    </div>
-                </div>
-                
-            ))
-        }
+        {countries?.map((country) => (
+          <div className="country_card">
+            <div className="country_img">
+              <img src={country.flags.png} alt="" />
+            </div>
+            <div className="country_data">
+              <h3>{country.name.common}</h3>
+              <h6>Population:{country.population}</h6>
+              <h6>Region:{country.region}</h6>
+              <h6>Capital:{country.capital}</h6>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
