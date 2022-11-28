@@ -25,6 +25,7 @@ body{
   top:0;
   left: 0;
   background-color: hsl(209, 23%, 22%);
+  z-index: 11;
 }
 
 .header h5{
@@ -90,4 +91,28 @@ input{
   border: none;
   outline: none;
   margin-bottom: 50px;
+  cursor: pointer;
 }
+
+::placeholder{
+  color: #fff;
+
+}
+
+.country_top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+select{
+  padding: 10px 25px;
+  background: hsl(209, 23%, 22%);
+  margin-bottom: 50px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
